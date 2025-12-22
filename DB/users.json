@@ -1,7 +1,6 @@
 [
-    {
-        "id": "1",
-        "userName": "Avraham levi",
-        "password": "3242"
-    }
+  {
+    "id": 2,
+    "name": "Yael"
+  }
 ]

@@ -1,8 +1,14 @@
 [
   {
-    "id": "1",
-    "userId": "1",
-    "categotyName": "salary",
+    "id": 6,
+    "uId": 2,
+    "categoryName": "salary",
+    "categoryType": "income"
+  },
+  {
+    "id": 7,
+    "uId": 2,
+    "categoryName": "salary",
     "categoryType": "income"
   }
 ]
