@@ -36,14 +36,14 @@ export async function getCategoryByIdCtrl(req, res) {
 
 export async function createCategoryCtrl(req, res) {
   try {
-    const { uId, categoryName, categoryType } = req.body;
-    if (!uId || !categoryName || !categoryType) {
+    const { userId, categoryName, categoryType, iconName } = req.body;
+    if (!userId || !categoryName || !categoryType || ! iconName) {
       return res.status(400).json({
-        msg: "All fields are required: uId, categoryName, categoryType",
+        msg: "All fields are required: userId, categoryName, categoryType, iconName",
       });
     }
 
-    const allowedKeys = ["uId", "categoryName", "categoryType"];
+    const allowedKeys = ["userId", "categoryName", "categoryType", "iconName"];
     const bodyKeys = Object.keys(req.body);
 
     const isValid = bodyKeys.every((key) => allowedKeys.includes(key));
@@ -51,16 +51,17 @@ export async function createCategoryCtrl(req, res) {
       return res.status(400).json({ msg: "Invalid fields in request body" });
     }
 
-    const userId = Number(uId);
-    if (isNaN(userId)) {
-      return res.status(400).json({ msg: "uId must be a number" });
+    const uId = Number(userId);
+    if (isNaN(uId)) {
+      return res.status(400).json({ msg: "userId must be a number" });
     }
     const id = await getNextId(fileName);
     const newCategory = {
       id,
-      uId,
+      userId: uId,
       categoryName,
       categoryType,
+      iconName
     };
     await createCategoryService(newCategory);
     res.status(200).json({ msg: "Category added successfully" });
@@ -73,7 +74,7 @@ export async function createCategoryCtrl(req, res) {
 export async function updateCategoryCtrl(req, res) {
   try {
     const id = Number(req.params.id);
-    const { categoryName, categoryType } = req.body;
+    const {userId, categoryName, categoryType, iconName } = req.body;
     if (!id)
       return res.status(400).json({ msg: "You must enter an id value " });
     const category = await getCategoryByIdService(id);
@@ -81,8 +82,10 @@ export async function updateCategoryCtrl(req, res) {
       return res.status(400).json({ msg: "category is not found" });
     const updateCategory = {
       ...category,
+      ...(userId && {userId}),
       ...(categoryName && { categoryName }),
       ...(categoryType && { categoryType }),
+      ...(iconName && {iconName})
     };
     await updateCategoryService(id, updateCategory);
     res.status(200).json({ msg: "Category updated" });

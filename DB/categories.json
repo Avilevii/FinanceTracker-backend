@@ -1,14 +1,22 @@
 [
   {
-    "id": 6,
-    "uId": 2,
-    "categoryName": "salary",
+    "id": 1,
+    "userId": 3,
+    "categoryName": "bituah ",
+    "categoryType": "income",
+    "iconName": "HIII"
+  },
+  {
+    "id": 3,
+    "userId": 3,
+    "categoryName": "bituah ",
     "categoryType": "income"
   },
   {
-    "id": 7,
-    "uId": 2,
-    "categoryName": "salary",
-    "categoryType": "income"
+    "id": 4,
+    "userId": 3,
+    "categoryName": "bituah ",
+    "categoryType": "income",
+    "iconName": "HI"
   }
 ]
