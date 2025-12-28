@@ -1,8 +1,8 @@
 import { getAllUsersService } from "../services/usersService.js";
 
-export async function loginCtrl(req, res) {
+export async function loginCtrl({body}, res) {
   try {
-    const { userName, password } = req.body;
+    const { userName, password } = body;
     if (!userName || !password)
       return res.status(400).json({ msg: "you must enter all fields" });
     const users = await getAllUsersService();

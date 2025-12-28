@@ -33,7 +33,6 @@ export async function updateUserService(id, newUser) {
 export async function deleteUserService(id) {
   const data = await readDB(fileName);
   const index = data.findIndex((obj) => obj.id === id);
-  console.log(index);
   if (index === -1) return false;
   data.splice(index, 1);
   await writeDB(fileName, data);
@@ -43,7 +42,6 @@ export async function deleteUserService(id) {
 // פונקציית בדיקה
 async function test() {
   const result = await deleteUserService(1);
-  console.log(result); // true אם נמחק, false אם לא מצא
 }
 
 test();

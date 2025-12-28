@@ -43,7 +43,6 @@ export async function deleteCategoryService(id) {
 
 async function test(){
    const data =  await deleteCategoryService(2);
-    // console.log(data)
 }
 
 test()

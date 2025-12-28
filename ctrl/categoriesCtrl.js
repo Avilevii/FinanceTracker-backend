@@ -5,6 +5,7 @@ import {
   getCategoryByIdService,
   updateCategoryService,
 } from "../services/categoriesService.js";
+import { getFormattedDate } from "../utils/getFormDate.js";
 import { getNextId } from "../utils/nextIdInDB.js";
 
 const fileName = "categories.json";
@@ -56,12 +57,14 @@ export async function createCategoryCtrl(req, res) {
       return res.status(400).json({ msg: "userId must be a number" });
     }
     const id = await getNextId(fileName);
+    const date = getFormattedDate();
     const newCategory = {
       id,
       userId: uId,
       categoryName,
       categoryType,
-      iconName
+      iconName,
+      date
     };
     await createCategoryService(newCategory);
     res.status(200).json({ msg: "Category added successfully" });

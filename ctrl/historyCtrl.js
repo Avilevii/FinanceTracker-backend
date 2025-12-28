@@ -80,7 +80,7 @@ export async function createHistoryCtrl(req, res) {
       id,
       userId: Number(userId),
       amaunt: Number(amaunt),
-      categotyId: Number(categotyId),
+      categoryId: Number(categotyId),
       description,
       date
     };
