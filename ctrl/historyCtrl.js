@@ -43,30 +43,30 @@ export async function getHistoryByIdCtrl(req, res) {
 
 export async function createHistoryCtrl(req, res) {
   try {
-    const { userId, amaunt, categotyId, description} = req.body;
+    const { userId, amount, categotyId, description} = req.body;
 
     if (
       userId === undefined ||
-      amaunt === undefined ||
+      amount === undefined ||
       categotyId === undefined ||
       !description
     ) {
       return res.status(400).json({
-        msg: "All fields are required: userId, amaunt, categotyId, description",
+        msg: "All fields are required: userId, amount, categotyId, description",
       });
     }
 
     if (
       isNaN(Number(userId)) ||
-      isNaN(Number(amaunt)) ||
+      isNaN(Number(amount)) ||
       isNaN(Number(categotyId))
     ) {
       return res.status(400).json({
-        msg: "userId, amaunt and categotyId must be numbers",
+        msg: "userId, amount and categotyId must be numbers",
       });
     }
 
-    const allowedKeys = ["userId", "amaunt", "categotyId", "description"];
+    const allowedKeys = ["userId", "amount", "categotyId", "description"];
     const bodyKeys = Object.keys(req.body);
     const isValid = bodyKeys.every((key) => allowedKeys.includes(key));
     if (!isValid) {
@@ -79,7 +79,7 @@ export async function createHistoryCtrl(req, res) {
     const newHistory = {
       id,
       userId: Number(userId),
-      amaunt: Number(amaunt),
+      amount: Number(amount),
       categoryId: Number(categotyId),
       description,
       date
@@ -105,12 +105,12 @@ export async function updateHistoryCtrl(req, res) {
       return res.status(404).json({ msg: "History not found" });
     }
 
-    const { userId, amaunt, categotyId, description, date } = req.body;
+    const { userId, amount, categotyId, description, date } = req.body;
 
     const updatedHistory = {
       ...history,
       ...(userId !== undefined && { userId: Number(userId) }),
-      ...(amaunt !== undefined && { amaunt: Number(amaunt) }),
+      ...(amount !== undefined && { amount: Number(amount) }),
       ...(categotyId !== undefined && { categotyId: Number(categotyId) }),
       ...(description && { description })
     };

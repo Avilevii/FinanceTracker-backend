@@ -2,7 +2,7 @@ import {
   createCategoryService,
   deleteCategoryService,
   getAllCategoriesService,
-  getCategoryByIdService,
+  getCategoryByUserIdService,
   updateCategoryService,
 } from "../services/categoriesService.js";
 import { getFormattedDate } from "../utils/getFormDate.js";
@@ -20,11 +20,11 @@ export async function getAllCategoriesCtrl(req, res) {
   }
 }
 
-export async function getCategoryByIdCtrl(req, res) {
+export async function getCategoryByUserIdCtrl(req, res) {
   try {
-    const id = Number(req.params.id);
-    if (!id) return res.status(400).json({ msg: "You must enter vlaue" });
-    const data = await getCategoryByIdService(id);
+    const userId = Number(req.params.userId);
+    if (!userId) return res.status(400).json({ msg: "You must enter vlaue" });
+    const data = await getCategoryByUserIdService(userId);
     if (!data) {
       res.status(404).json({ msg: "Category is not found" });
     }
@@ -80,7 +80,7 @@ export async function updateCategoryCtrl(req, res) {
     const {userId, categoryName, categoryType, iconName } = req.body;
     if (!id)
       return res.status(400).json({ msg: "You must enter an id value " });
-    const category = await getCategoryByIdService(id);
+    const category = await getCategoryByUserIdService(id);
     if (!category)
       return res.status(400).json({ msg: "category is not found" });
     const updateCategory = {

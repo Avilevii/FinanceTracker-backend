@@ -9,7 +9,7 @@ export async function getLastweekHistory(userId){
     const data = await readDB(historyDB);
     const categories = await readDB(categoriesDB)
     const total = totalcalculet(data, categories,userId);
-    return total;
+    return total || {};
 }
 
 // פונקציה שמחזירה את כל ההוצאות וההכנסות של אותו החודש, וגם את כל הקטגוריות של אותו חודש 

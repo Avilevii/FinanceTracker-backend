@@ -2,33 +2,33 @@
   {
     "id": 1,
     "userId": 1,
-    "amaunt": 100,
-    "categotyId": 1,
+    "amount": 100,
+    "categoryId": 1,
     "description": "dd",
     "date": "23/12/2025 12:29:07"
   },
   {
     "id": 2,
     "userId": 1,
-    "amaunt": 100,
-    "categotyId": 1,
+    "amount": 100,
+    "categoryId": 1,
     "description": "dd",
     "date": "23/12/2025 12:29:13"
   },
   {
     "id": 3,
     "userId": 4,
-    "amaunt": 150 ,
-    "categotyId": 1,
+    "amount": 150 ,
+    "categoryId": 1,
     "description": "dd",
     "date": "23/12/2025 12:29:14"
   },
   {
     "id": 4,
     "userId": 1,
-    "amaunt": 100,
-    "categotyId": 1,
+    "amount": 100,
+    "categoryId": 1,
     "description": "dd",
     "date": "23/12/2025 12:29:14"
   }
-]
+]           

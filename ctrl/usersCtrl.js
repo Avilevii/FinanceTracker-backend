@@ -38,6 +38,7 @@ export async function getUserByIdCtrl(req, res) {
 export async function createUserCtrl(req, res) {
   try {
     const { userName, password } = req.body;
+    console.log(userName, password)
     if (!userName || !password)
       return res.status(400).json({ msg: "You must enter all fields" });
 
@@ -58,7 +59,7 @@ export async function createUserCtrl(req, res) {
       date
     };
     await createUserService(newUser);
-    res.status(200).json({ msg: "user added successfully" });
+    res.status(200).json({ msg: "user added successfully", userId: id });
   } catch (err) {
     console.error(err);
     res.status(500).json({ Error: "בקשתך נכשלה !" });

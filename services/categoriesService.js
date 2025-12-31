@@ -8,10 +8,10 @@ export async function getAllCategoriesService() {
   return data || [];
 }
 
-export async function getCategoryByIdService(id) {
+export async function getCategoryByUserIdService(id) {
   const data = await readDB(fileName);
 
-  const item = data.find((obj) => obj.id === id);
+  const item = data.filter((obj) => obj.userId === id);
   return item || null;
 }
 

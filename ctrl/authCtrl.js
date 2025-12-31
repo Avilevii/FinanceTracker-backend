@@ -11,7 +11,7 @@ export async function loginCtrl({body}, res) {
       u => u.userName === userName && u.password === password
     );
     if(!user) return res.status(401).json({msg: "userName or password is error"});
-    res.status(200).json({msg: "you conected successfully",user: user.id})
+    res.status(200).json({msg: "you conected successfully",userId: user.id})
   } catch (err) {
     console.error(err);
     res.status(500).json({ Error: "בקשתך נכשלה !" });
