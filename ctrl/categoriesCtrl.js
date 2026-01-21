@@ -2,6 +2,7 @@ import {
   createCategoryService,
   deleteCategoryService,
   getAllCategoriesService,
+  getCategoryByIdService,
   getCategoryByUserIdService,
   updateCategoryService,
 } from "../services/categoriesService.js";
@@ -26,7 +27,7 @@ export async function getCategoryByUserIdCtrl(req, res) {
     if (!userId) return res.status(400).json({ msg: "You must enter vlaue" });
     const data = await getCategoryByUserIdService(userId);
     if (!data) {
-      res.status(404).json({ msg: "Category is not found" });
+     return res.status(404).json({ msg: "Category is not found" });
     }
     res.status(200).json(data);
   } catch (err) {
@@ -67,7 +68,7 @@ export async function createCategoryCtrl(req, res) {
       date
     };
     await createCategoryService(newCategory);
-    res.status(200).json({ msg: "Category added successfully" });
+    res.status(200).json({ msg: "Category added successfully" , cretedCategory: newCategory});
   } catch (err) {
     console.error(err);
     res.status(500).json({ Error: "בקשתך נכשלה !" });
@@ -80,7 +81,7 @@ export async function updateCategoryCtrl(req, res) {
     const {userId, categoryName, categoryType, iconName } = req.body;
     if (!id)
       return res.status(400).json({ msg: "You must enter an id value " });
-    const category = await getCategoryByUserIdService(id);
+    const category = await getCategoryByIdService(id);
     if (!category)
       return res.status(400).json({ msg: "category is not found" });
     const updateCategory = {
@@ -90,8 +91,8 @@ export async function updateCategoryCtrl(req, res) {
       ...(categoryType && { categoryType }),
       ...(iconName && {iconName})
     };
-    await updateCategoryService(id, updateCategory);
-    res.status(200).json({ msg: "Category updated" });
+   const categoryUpdeted =  await updateCategoryService(id, updateCategory);
+    res.status(200).json({ msg: "Category updated", categoryUpdeted });
   } catch (err) {
     console.error(err);
     res.status(500).json({ Error: "בקשתך נכשלה !" });
@@ -105,7 +106,7 @@ export async function deleteCategoryCtrl(req, res) {
       return res.status(400).json({ msg: "You must enter an id value " });
    const isDeleted =  await deleteCategoryService(id);
    if(!isDeleted) res.status(400).json({msg: "category is not exist"})
-    res.status(200).json({msg: "category delted successfully"})
+    res.status(200).json({msg: "category delted successfully", idDelted: id})
   } catch (err) {
     console.error(err);
     res.status(500).json({ Error: "בקשתך נכשלה !" });

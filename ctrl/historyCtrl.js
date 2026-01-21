@@ -1,9 +1,10 @@
 import {
   getAllHistoryService,
-  getHistoryByIdService,
   createHistoryService,
   updateHistoryService,
   deleteHistoryService,
+  getHistoryByUserIdService,
+  getHistoryByIdService,
 } from "../services/historyService.js";
 import { getFormattedDate } from "../utils/getFormDate.js";
 import { getNextId } from "../utils/nextIdInDB.js";
@@ -22,14 +23,14 @@ export async function getAllHistoryCtrl(req, res) {
   }
 }
 
-export async function getHistoryByIdCtrl(req, res) {
+export async function getHistoryByUserIdCtrl(req, res) {
   try {
-    const id = Number(req.params.id);
-    if (isNaN(id)) {
+    const userId = Number(req.params.userId);
+    if (isNaN(userId)) {
       return res.status(400).json({ msg: "ID must be a number" });
     }
 
-    const history = await getHistoryByIdService(id);
+    const history = await getHistoryByUserIdService(userId);
     if (!history) {
       return res.status(404).json({ msg: "History not found" });
     }
@@ -43,30 +44,29 @@ export async function getHistoryByIdCtrl(req, res) {
 
 export async function createHistoryCtrl(req, res) {
   try {
-    const { userId, amount, categotyId, description} = req.body;
-
+    const { userId, amount, categoryId, description, clientDate} = req.body;
     if (
       userId === undefined ||
       amount === undefined ||
-      categotyId === undefined ||
+      categoryId === undefined ||
       !description
     ) {
       return res.status(400).json({
-        msg: "All fields are required: userId, amount, categotyId, description",
+        msg: "All fields are required: userId, amount, categoryId, description",
       });
     }
 
     if (
       isNaN(Number(userId)) ||
       isNaN(Number(amount)) ||
-      isNaN(Number(categotyId))
+      isNaN(Number(categoryId))
     ) {
       return res.status(400).json({
-        msg: "userId, amount and categotyId must be numbers",
+        msg: "userId, amount and categoryId must be numbers",
       });
     }
 
-    const allowedKeys = ["userId", "amount", "categotyId", "description"];
+    const allowedKeys = ["userId", "amount", "categoryId", "description", 'clientDate'];
     const bodyKeys = Object.keys(req.body);
     const isValid = bodyKeys.every((key) => allowedKeys.includes(key));
     if (!isValid) {
@@ -74,19 +74,18 @@ export async function createHistoryCtrl(req, res) {
     }
 
     const id = await getNextId(fileName);
-    const date = getFormattedDate();
+    const date = clientDate ? clientDate : getFormattedDate();
 
     const newHistory = {
       id,
       userId: Number(userId),
       amount: Number(amount),
-      categoryId: Number(categotyId),
+      categoryId: Number(categoryId),
       description,
       date
     };
-
     await createHistoryService(newHistory);
-    res.status(200).json({ msg: "History added successfully" });
+    res.status(200).json({ msg: "History added successfully", createdHistory: newHistory });
   } catch (err) {
     console.error(err);
     res.status(500).json({ Error: "בקשתך נכשלה !" });
@@ -102,21 +101,21 @@ export async function updateHistoryCtrl(req, res) {
 
     const history = await getHistoryByIdService(id);
     if (!history) {
-      return res.status(404).json({ msg: "History not found" });
+      return res.status(404).json({ msg: "History not found" , history});
     }
 
-    const { userId, amount, categotyId, description, date } = req.body;
+    const { userId, amount, categoryId, description, date } = req.body;
 
     const updatedHistory = {
       ...history,
       ...(userId !== undefined && { userId: Number(userId) }),
       ...(amount !== undefined && { amount: Number(amount) }),
-      ...(categotyId !== undefined && { categotyId: Number(categotyId) }),
+      ...(categoryId !== undefined && { categoryId: Number(categoryId) }),
       ...(description && { description })
     };
 
     await updateHistoryService(id, updatedHistory);
-    res.status(200).json({ msg: "History updated successfully" });
+    res.status(200).json({ msg: "History updated successfully", updatedHistory  });
   } catch (err) {
     console.error(err);
     res.status(500).json({ Error: "בקשתך נכשלה !" });

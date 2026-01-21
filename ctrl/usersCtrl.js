@@ -38,7 +38,6 @@ export async function getUserByIdCtrl(req, res) {
 export async function createUserCtrl(req, res) {
   try {
     const { userName, password } = req.body;
-    console.log(userName, password)
     if (!userName || !password)
       return res.status(400).json({ msg: "You must enter all fields" });
 

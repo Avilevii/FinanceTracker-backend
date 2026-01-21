@@ -1,4 +1,4 @@
-function getLastWeekStart() {
+export function getLastWeekStart() {
   const today = new Date();
   const lastWeek = new Date(today);
   lastWeek.setDate(today.getDate() - 7); 

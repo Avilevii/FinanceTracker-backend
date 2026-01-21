@@ -13,7 +13,6 @@ export async function getBalanceService(targetId) {
 
   userHistory.forEach(({ amount, categoryId }) => {
     const category = userCategories.find(c => c.id === categoryId);
-
     if (!category) return;
 
     if (category.categoryType === 'income') {

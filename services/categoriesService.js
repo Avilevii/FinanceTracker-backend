@@ -8,11 +8,33 @@ export async function getAllCategoriesService() {
   return data || [];
 }
 
-export async function getCategoryByUserIdService(id) {
+export async function getCategoryByUserIdService(userId) {
   const data = await readDB(fileName);
 
-  const item = data.filter((obj) => obj.userId === id);
-  return item || null;
+  // 1. קטגוריות של המשתמש
+  const userCategories = data.filter(
+    c => c.userId === userId
+  );
+
+  // 2. דיפולטיביות שהמשתמש עדיין לא בחר
+  const defaultCategories = data.filter(c => {
+    if (c.userId !== 0) return false;
+
+    const userHasIt = userCategories.some(
+      uc => uc.iconName === c.iconName
+    );
+
+    return !userHasIt;
+  });
+
+  // 3. מחזירים הכל ביחד
+  return [...defaultCategories, ...userCategories];
+}
+
+export async function getCategoryByIdService(id) {
+  const data = await readDB(fileName);
+  const category = data.find(obj => obj.id === id);
+  return category || null;
 }
 
 export async function createCategoryService(newCategory) {
@@ -29,7 +51,7 @@ export async function updateCategoryService(id, updateCategory) {
   if (index === -1) return false;
   data[index] = updateCategory;
   await writeDB(fileName, data);
-  return true;
+  return data[index];
 }
 
 export async function deleteCategoryService(id) {

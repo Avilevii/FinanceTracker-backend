@@ -1,34 +1,74 @@
 [
   {
     "id": 1,
-    "userId": 1,
-    "amount": 100,
-    "categoryId": 1,
-    "description": "dd",
-    "date": "23/12/2025 12:29:07"
+    "userId": 3,
+    "amount": 20,
+    "categoryId": 11,
+    "description": "HI",
+    "date": "18/01/2024 16:24:55"
   },
   {
     "id": 2,
-    "userId": 1,
-    "amount": 100,
-    "categoryId": 1,
-    "description": "dd",
-    "date": "23/12/2025 12:29:13"
+    "userId": 3,
+    "amount": 50,
+    "categoryId": 12,
+    "description": "HI",
+    "date": "18/01/2026 16:25:14"
   },
   {
     "id": 3,
-    "userId": 4,
-    "amount": 150 ,
-    "categoryId": 1,
-    "description": "dd",
-    "date": "23/12/2025 12:29:14"
+    "userId": 3,
+    "amount": 10,
+    "categoryId": 11,
+    "description": "HI",
+    "date": "18/01/2025 16:28:07"
   },
   {
     "id": 4,
-    "userId": 1,
-    "amount": 100,
-    "categoryId": 1,
-    "description": "dd",
-    "date": "23/12/2025 12:29:14"
+    "userId": 3,
+    "amount": 500,
+    "categoryId": 12,
+    "description": "HI",
+    "date": "18/01/2026 16:28:19"
+  },
+  {
+    "id": 5,
+    "userId": 3,
+    "amount": 1500,
+    "categoryId": 14,
+    "description": "HI",
+    "date": "18/01/2026 16:28:42"
+  },
+  {
+    "id": 6,
+    "userId": 3,
+    "amount": 150,
+    "categoryId": 12,
+    "description": "HI",
+    "date": "18/01/2026 16:58:55"
+  },
+  {
+    "id": 7,
+    "userId": 3,
+    "amount": 150,
+    "categoryId": 11,
+    "description": "HI",
+    "date": "19/01/2026 09:39:41"
+  },
+  {
+    "id": 8,
+    "userId": 4,
+    "amount": 150,
+    "categoryId": 18,
+    "description": "HI",
+    "date": "19/01/2027 17:02:44"
+  },
+  {
+    "id": 9,
+    "userId": 3,
+    "amount": 150,
+    "categoryId": 10,
+    "description": "HI",
+    "date": "21/01/2011"
   }
-]           
+]

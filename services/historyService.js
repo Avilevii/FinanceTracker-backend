@@ -8,10 +8,17 @@ export async function getAllHistoryService() {
   return data || [];
 }
 
-export async function getHistoryByIdService(id) {
+export async function getHistoryByUserIdService(userId) {
   const data = await readDB(fileName);
-  const item = data.find(obj => obj.id === id);
-  return item || null;
+  const items = data.filter(obj => obj.userId === userId);
+  if(items.length === 0) return null;
+  return items || null;
+}
+
+export async function getHistoryByIdService(id){
+   const data = await readDB(fileName);
+    const item = data.find((obj) => obj.id === id);
+    return item || null;
 }
 
 export async function createHistoryService(newHistory) {
