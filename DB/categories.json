@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "userId": 0,
+    "categoryName": "בריאות",
+    "categoryType": "expenses",
+    "iconName": "health"
+  },
+  {
+    "id": 9,
+    "userId": 0,
+    "categoryName": "שונות",
+    "categoryType": "income",
+    "iconName": "other"
+  },
+  {
+    "id": 3,
+    "userId": 0,
+    "categoryName": "רכב ",
+    "categoryType": "expenses",
+    "iconName": "car"
+  },
+  {
+    "id": 4,
+    "userId": 0,
+    "categoryName": "אוכל",
+    "categoryType": "expenses",
+    "iconName": "fastFood"
+  },
+  {
+    "id": 5,
+    "userId": 0,
+    "categoryName": "בונוס ",
+    "categoryType": "income",
+    "iconName": "bonus"
+  },
+  {
+    "id": 7,
+    "userId": 0,
+    "categoryName": "משכורת ",
+    "categoryType": "income",
+    "iconName": "salary"
+  }
+]

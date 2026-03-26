@@ -1,43 +1,36 @@
 import { readDB } from "../utils/readFileDb.js";
 import { writeDB } from "../utils/writeFileDb.js";
 
-const fileName = 'history.json';
+const fileName = 'recurring.json';
 
-export async function getAllHistoryService() {
+export async function getAllRecurringService() {
   const data = await readDB(fileName);
   return data || [];
 }
 
-export async function getHistoryByUserIdService(userId) {
+export async function getRecurringByIdService(id) {
   const data = await readDB(fileName);
-  const items = data.filter(obj => obj.userId === userId);
-  if(items.length === 0) return null;
-  return items || null;
+  const item = data.find(obj => obj.id === id);
+  return item || null;
 }
 
-export async function getHistoryByIdService(id){
-   const data = await readDB(fileName);
-    const item = data.find((obj) => obj.id === id);
-    return item || null;
-}
-
-export async function createHistoryService(newHistory) {
+export async function createRecurringService(newRecurring) {
   const data = await readDB(fileName);
-  data.push(newHistory);
+  data.push(newRecurring);
   await writeDB(fileName, data);
   return true;
 }
 
-export async function updateHistoryService(id, newHistory) {
+export async function updateRecurringService(id, newRecurring) {
   const data = await readDB(fileName);
   const index = data.findIndex(obj => obj.id === id);
   if (index === -1) return false;
-  data[index] = newHistory;
+  data[index] = newRecurring;
   await writeDB(fileName, data);
   return true;
 }
 
-export async function deleteHistoryService(id) {
+export async function deleteRecurringService(id) {
   const data = await readDB(fileName);
   const index = data.findIndex(obj => obj.id === id);
   if (index === -1) return false;
